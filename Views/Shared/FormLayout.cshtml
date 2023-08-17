@@ -1,0 +1,9 @@
+﻿@using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls @using System.Linq @using System.Data
+@model object
+@{
+    var model = Model as HPA.Web.Controls.FormLayout<Object>;
+    (model.DataSetting as HPA.MasterData.DataSetting).WebViewPage = this.ViewContext;
+}
+<div style="width:100%; height:100%">
+    @Html.DevExpress().FormLayout(model).GetHtml()
+</div>

@@ -1,0 +1,57 @@
+﻿@using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls
+@model Object
+@{
+    var ds = Model as HPA.MasterData.DataSetting;
+    ds.WebViewPage = this.ViewContext;
+    Layout = string.Empty;
+    var StringLayout = ds.StringLayoutJS();
+    var KNC = ds.GetKNCID();
+    var TableName = ds.GetKNCID(CommonS.TableName);
+    var TableNamePOST = (ds.CFD.TableName + CommonS.POST);
+    var FormID = ds.GetKNCID(CommonS.FormID);
+    var isDirty = ds.GetKNCID(CommonS.isDirty);
+    var SessionID = ds.GetKNCID(CommonS.SessionID);
+    var ConID = ds.GetKNCID(CommonS.ConID);
+    var selectedIDRow = ds.GetKNCID(CommonS.selectedIDRow);
+    var VisibleIndexRow = ds.GetKNCID(CommonS.VisibleIndexRow);
+    var ID = ds.GetKNCID(CommonS.ID);
+    var SubmitCommand = ds.GetKNCID(CommonS.SubmitCommand);
+    var ColumnName = ds.GetKNCID(CommonS.ColumnName);
+    var value = ds.GetKNCID(CommonS.value);
+    var valuePa = ds.GetKNCID(CommonS.valuePa);
+    var ObjResult = ds.GetKNCID(CommonS.ObjResult);
+}
+<div style="width:100%; height:100%" data-url="@ds.CFD.OptionBuild.GetUrlTableName()" id="@(ds.CFD.TableName+"paradisediv")">
+    @(new System.Web.HtmlString(ds.GetScriptFile()))
+    <form style="width:100%; height:100%"
+          action="@ds.CFD.OptionBuild.GetUrlTableName()"
+          id="@ds.CFD.IDForm"
+          name="@ds.CFD.IDForm"
+          data-ajax="true" method="post"
+          data-ajax-begin="DataSettingAjax_OnBegin"
+          data-ajax-failure="DataSettingAjax_OnFailure"
+          data-ajax-method="POST"
+          data-ajax-success="DataSettingAjax_OnSuccess">
+        <input name="@TableName" id="@TableName" type="hidden" value="@ds.Name" />
+        <input name="@TableNamePOST" id="@TableNamePOST" type="hidden" value="@KNC" />
+        <input name="@FormID" id="@FormID" type="hidden" value="@ds.FormID" />
+        <input name="@isDirty" id="@isDirty" type="hidden" />
+        <input name="@SessionID" id="@SessionID" type="hidden" />
+        <input name="@ConID" id="@ConID" type="hidden" />
+        <input name="@selectedIDRow" id="@selectedIDRow" type="hidden" />
+        <input name="@VisibleIndexRow" id="@VisibleIndexRow" type="hidden" />
+        <input name="@ID" id="@ID" type="hidden" />
+        <input name="@SubmitCommand" id="@SubmitCommand" type="hidden" />
+        <input name="@ColumnName" id="@ColumnName" type="hidden" />
+        <input name="@value" id="@value" type="hidden" />
+        <input name="@valuePa" id="@valuePa" type="hidden" />
+        <input name="@ObjResult" id="@ObjResult" type="hidden" />
+        @(new System.Web.HtmlString(ds.GetStyle()))
+        @(new System.Web.HtmlString(ds.GetScript()))
+        @if (StringLayout == null){ Html.DevExpress().FormLayout((ds.settings as FormLayout<Object>)).GetHtml();}
+        @(new System.Web.HtmlString(StringLayout))
+        @(new System.Web.HtmlString(ds.FilterBoxPopup.StringLayout ?? ""))
+        @(new System.Web.HtmlString(ds.GetScriptEnd()))
+        @(new System.Web.HtmlString(ds.HtmlEnd.ToString()))
+    </form>
+</div>

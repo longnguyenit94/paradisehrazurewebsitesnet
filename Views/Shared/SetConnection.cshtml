@@ -1,0 +1,14 @@
+﻿@using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls @using HPA.Web.Controllers @using System.Linq @using System.Data
+@model HPA.Web.SetConnection
+@{
+    ViewBag.Title = CommonS.SetConnection + " - Paradise HR";
+    Layout = !CommonS.SqlHelperIsConnected ? "~/Views/Shared/__rootLayout.cshtml" : "";
+}
+<form action="@(CommonS.APPLICATION_PATH)/HPASystemAdmin/SetConnection" data-ajax="true" data-ajax-begin="DataSettingAjax_OnBegin" data-ajax-failure="DataSettingAjax_OnFailure" data-ajax-method="POST" data-ajax-success="DataSettingAjax_OnSuccess"
+      method="post" id="@CommonS.SetConnection" name="@CommonS.SetConnection" style="width:100%; height:100%">
+    @Html.Hidden(CommonS.SubmitCommand)
+    @{var option = @"{ formData: " + Model.ObjectJS() + @", showColonAfterLabel: false, elementAttr: {style:'margin: auto;max-width: 500px;'}, colCount:100, items: [{ itemType: ""group"", colCount:100, colSpan:100, items: [ {dataField: ""ServerName"",label: {text: ""Server Name""},editorType: ""dxTextBox"",colSpan:100}, {dataField: ""DatabaseName"",label: {text: ""Database Name""},editorType: ""dxTextBox"",colSpan:100}, {dataField: ""UserName"",label: {text: ""User Name""},editorType: ""dxTextBox"",colSpan:100}, {dataField: ""Password"",label: {text: ""Password""},editorType: ""dxTextBox"",editorOptions: { mode: ""password"" },colSpan:100 }, ] },  { itemType: ""button"",colSpan:100, horizontalAlignment: ""center"", buttonOptions: { text: ""Test and restart"", type: ""success"", useSubmitBehavior: false, onClick: btnTestCS_Click } }] } ";}
+    <div id="Set_Connection"></div>
+    <script> window.Set_Connection.option = @Html.Raw(option); FormLayoutJS_Init(window.Set_Connection); HideWaitingPanel(); </script>
+    @Html.Raw(Model.lblMessage.StringLayout)
+</form>

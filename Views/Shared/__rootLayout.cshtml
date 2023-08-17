@@ -1,0 +1,23 @@
+﻿@model Object
+@{var _Login = (this.ViewContext.Controller as HPA.Web.Controllers.BaseController).__Login;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@_Login.Title((string)ViewBag.Title)</title>
+</head>
+<body>
+    @Html.Raw(_Login.WriteHeaderBefore())
+    @if (_Login.SupportMVC > 0)
+    {
+        Html.DevExpress().GetStyleSheets(_Login.GetStyleSheets());
+        Html.DevExpress().GetScripts(_Login.GetScripts());
+    }
+    @Html.Raw(_Login.WriteHeaderAfter())
+    @RenderBody()
+    @Html.Raw(_Login.WriteHeaderAfterTimeOut())
+</body>
+</html>

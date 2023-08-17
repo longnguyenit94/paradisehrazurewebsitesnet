@@ -1,0 +1,5 @@
+﻿@model HPA.Web.Controls.GridView
+@{ 
+    Model.WebViewPage = this.ViewContext;
+    Html.DevExpress().GridView(Model).Bind(Model.DataSource).GetHtml();
+}

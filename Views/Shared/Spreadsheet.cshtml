@@ -1,0 +1,9 @@
+﻿@using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls @using System.Linq @using System.Data @using HPA.Web.Controllers
+@model object
+@{ var model = Model as HPA.Web.Controls.Spreadsheet;}
+@{
+    var a = Html.DevExpress().Spreadsheet(model);
+    var id = (model.DataSetting.Login.SessionID ?? "") + (model.FileName ?? "");
+    a = File.Exists(model.FullFileName) ? a.Open(model.FullFileName) : a.Open(id, () => model.EditValue as byte[]);
+    a.GetHtml();
+}

@@ -1,0 +1,10 @@
+﻿@using System @using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls @using HPA.Web.Controllers @using System.Linq @using System.Data
+@model SuperForm
+@{
+    ViewBag.Title = Model.Text + " - Paradise HR"; ;
+    Layout = "";
+}
+<div>
+@Html.Raw(Model.pcSF.StringLayout)
+<script>$(function () {@Html.Raw(Model.pcSF.ClientInit)});</script>
+</div>

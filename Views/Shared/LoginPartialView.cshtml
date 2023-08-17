@@ -1,0 +1,33 @@
+﻿@using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls @using HPA.Web.Controllers @using System.Linq @using System.Data
+@model HPA.Login
+@{
+    Layout = "";
+    var _Login = (this.ViewContext.Controller as HPA.Web.Controllers.BaseController).__Login;
+    var height = _Login.HeightImageLogo;
+}
+<div style="height: 100%; width: 100%; position: relative; top: 0px; left: 0px; background: url(@(_Login.ApplicationPath+"Content/Images/login_background_hrm.jpg")); background-size: cover; background-repeat: no-repeat; background-position: center;">
+    <div style="background-color:@_Login.BaseColorHex;width:100%;height:@(height)px;">
+        <img src="data:image/png;base64,@_Login.LogoBaseString64" alt="paradise_vietinsoft" style="position:absolute;left:0px;cursor:pointer;height:@(height)px;" />
+        <img src="@(_Login.ApplicationPath+"Content/Images/logo.png")" alt="paradise_vietinsoft" style="position:absolute;right:0px;cursor:pointer;height:@(height)px;width:@(height)px;" />
+    </div>
+    @if (!_Login.IsMobileDevice)
+    {
+        <div style="background-color:@_Login.BaseColorHex;color:#fff;width:100%;height:@(height)px;position:absolute;left:0px;bottom:0px">
+            <div class="centerDiv">
+                <div style="float:left;text-align:right;font-size:21px;clear:both;color:#FFEB3B;font-weight:bold;font-style:italic; margin-right:10px">
+                    Best Solution<br>for<br>Human Resources Management
+                </div>
+                <div style="float:left;font-size:16px;">
+                    Employee Profile Management<br> Time & Attendance Management<br> Leave Registration & Approval<br> Payroll Management
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div id="base-login">
+    <div class="col-md-offset-12 col-md-12" style="padding:0;">
+        <div class="form-login box-shadow-form" id="ParadiseLogin">
+            @(new System.Web.HtmlString(_Login.UserID < 0 ? _Login.htmlGet: ""))
+        </div>
+    </div>
+</div>

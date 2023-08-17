@@ -1,0 +1,8 @@
+﻿@using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls @using HPA.Web.Controllers @using System.Linq @using System.Data
+@{
+    var _Login = (this.ViewContext.Controller as HPA.Web.Controllers.BaseController)._Login;
+
+    Layout = _Login.IsAjaxRequest ? "" : "~/Views/Shared/_rootLayout.cshtml";
+}
+<div>ParadiseHRM: NoRight</div>
+

@@ -1,0 +1,18 @@
+﻿@using HPA.Service.Common @using HPA.Web @using HPA.Web.Controls @using HPA.Web.Controllers @using System.Linq @using System.Data
+@model Object
+@{
+    var ds = Model as HPA.MasterData.DataSetting;
+    ds.WebViewPage = this.ViewContext;
+    Layout = string.Empty;
+    Html.EnableClientValidation(false);
+    Html.EnableUnobtrusiveJavaScript(true);
+    var StringLayout = ds.StringLayoutJS();
+}
+<div style="width:100%; height:100%">
+    @(new System.Web.HtmlString(ds.GetStyle()))
+    @(new System.Web.HtmlString(ds.GetScript()))
+    @if (StringLayout == null) {Html.DevExpress().FormLayout((ds.settings as FormLayout<Object>)).GetHtml();}
+    @(new System.Web.HtmlString(StringLayout))
+    @(new System.Web.HtmlString(ds.GetScriptEnd()))
+    @(new System.Web.HtmlString(ds.HtmlEnd.ToString()))
+</div>

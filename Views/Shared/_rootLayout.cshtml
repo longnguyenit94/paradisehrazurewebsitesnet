@@ -1,0 +1,39 @@
+﻿@using HPA.Service.Common
+@model Object
+@{
+    var _Login = (this.ViewContext.Controller as HPA.Web.Controllers.BaseController).__Login;
+    Layout = "~/Views/Shared/__rootLayout.cshtml";
+}
+<script id="ParadiseMobileBefore"></script>
+<div id="appapp" style="width:100%;">
+    <div class="prd-b-color" style="color:white;fill:white" id="pnMenu">
+        <div id="MemuLogo" class="prd-b-color prd-color prd-logo-height hideDiv" style="width:100%;">
+            <img id="MemuLogoLeft" alt="paradise_vietinsoft" class="prd-logo-height" style="cursor:pointer;position:absolute;left:0px" />
+            <img id="MemuLogoRight" alt="paradise_vietinsoft" class="prd-logo-height" style="cursor:pointer;position:absolute;right:0px" />
+        </div>
+        <div style="clear:both"></div>
+        <div id="MemuMenu">
+            <div id="LeftMenu" style="float:left"></div>
+            <div id="RightMenu" class="prd-b-color" style="float:right"></div>
+            <div style="clear:both"></div>
+            <div id="CenterMenu" class="prd-b-color" style="clear:both"></div>
+        </div>
+    </div>
+    <div id="drawer" name="drawer">
+        <div id="main-layout-diagram" style="overflow-x:hidden; overflow-y:auto; display:block">
+            <script id="sc_clientInit" type="text/javascript">
+            $(function () {
+                window.LogoBaseString64 = '@Html.Raw(_Login.LogoBaseString64)';
+                @Html.Raw(_Login.LeftMenu.ClientInit)
+                @Html.Raw(_Login.RightMenu.ClientInit)
+                @Html.Raw(_Login.CenterMenu.ClientInit)
+                BuildMenu(@Html.Raw(_Login.MenuRootClient),@Html.Raw(_Login.RightMenuClient),@Html.Raw(_Login.GetKeyJS().SerializeObject()));
+                LoginShowActiveCompanyUrlCheck();
+                $("#sc_clientInit").remove();
+            });
+            </script>
+            @RenderBody()
+        </div>
+    </div>
+</div>
+<script id="ParadiseMobileAfter"></script>
